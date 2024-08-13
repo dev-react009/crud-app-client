@@ -14,7 +14,8 @@ const Create = () => {
         Axios.post(`${URI}AddUsr`,{name,email,age})
         .then(_=>window.confirm("user added SuccessFully"))
         .catch(err=>console.log(err));
-        Navigate('/')
+        Navigate('/');
+        window.location.reload();
     }
     return (
         <div className='d-flex vh-100 bg-primary  justify-content-center align-items-center'>
