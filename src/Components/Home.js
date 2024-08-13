@@ -10,20 +10,28 @@ const Home = () => {
 
     useEffect(() => {
         setLoading(true);
-        Axios.get(`${URI}Get`).then((res)=>{
+        fetchData()
+    }, []);
+
+    const fetchData =async ()=>{
+       await Axios.get(`${URI}Get`).then((res) => {
             setData(res.data)
             setLoading(false);
-        }).catch(er=>{console.log(er)
+        }).catch(er => {
+            console.log(er)
             setLoading(false);
-
         })
-    }, []);
+    }
     
-    const Deleteusr=(id)=>{
+    const Deleteusr=async(id)=>{
         setLoading(true);
         Axios.delete(`${URI}deleteUsr/${id}`)
-            .then(res => {
+        .then(res => {
                 console.log(res)
+                fetchData();
+                setLoading(false);
+                window.confirm("user deleted Succesfully!")
+
             })
             .catch((err)=> { setLoading(false)
                 console.log(err) })
