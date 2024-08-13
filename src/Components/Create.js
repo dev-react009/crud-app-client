@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
+const URI = process.env.REACT_APP_BACKEND_URL;
 
 const Create = () => {
     const [name, setName] = useState();
@@ -11,7 +11,7 @@ const Create = () => {
 
     const SubmitHandler=(e)=>{
         e.preventDefault();
-        Axios.post("http://localhost:2023/AddUsr",{name,email,age})
+        Axios.post(`${URI}AddUsr`,{name,email,age})
         .then(_=>window.confirm("user added SuccessFully"))
         .catch(err=>console.log(err));
         Navigate('/')

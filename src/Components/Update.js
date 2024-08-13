@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Axios from "axios";
+const URI = process.env.REACT_APP_BACKEND_URL;
 const Update = () => {
     const{id}=useParams();
     const [name, setName] = useState("");
@@ -10,20 +11,20 @@ const Update = () => {
 
 
     useEffect(() => {
-        Axios.get("http://localhost:2023/Getusr/"+id).then((res) => {
+        Axios.get("https://crud-app-backend-rho.vercel.app/Getusr/"+id).then((res) => {
             setName(res.data.name);
             setEmail(res.data.email);
             setAge(res.data.age);
         }).catch(er => console.log(er))
     }, [id]);
+    console.log(name)
 
-    const Modify=(e)=>{
+    const Modify= async(e)=>{
         e.preventDefault();
-        Axios.put("http://localhost:2023/UpdateUsr/" +id, { name, email, age })
+        await Axios.put(`${URI}UpdateUsr/${id}`, { name, email, age })
             .then(res => window.confirm("user updated Succesfully!"))
             .catch(err => console.log(err));
         Navigate('/');
-        window.location.reload();
     }
     return (
         <div className='d-flex vh-100 bg-primary  justify-content-center align-items-center'>
