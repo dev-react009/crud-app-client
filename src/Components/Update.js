@@ -21,7 +21,7 @@ const Update = () => {
 
     const Modify= async(e)=>{
         e.preventDefault();
-        Axios.put(`${URI}UpdateUsr/${id}`, { name, email, age })
+       await Axios.put(`${URI}UpdateUsr/${id}`, { name, email, age })
             .then(res => window.confirm("user updated Succesfully!"))
             .catch(err => console.log(err));
         Navigate('/');

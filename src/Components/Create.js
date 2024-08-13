@@ -9,13 +9,13 @@ const Create = () => {
     const [age, setAge] = useState();
     const Navigate=useNavigate();
 
-    const SubmitHandler=(e)=>{
+    const SubmitHandler= async(e)=>{
         e.preventDefault();
-        Axios.post(`${URI}AddUsr`,{name,email,age})
+       await Axios.post(`${URI}AddUsr`,{name,email,age})
         .then(_=>window.confirm("user added SuccessFully"))
         .catch(err=>console.log(err));
         Navigate('/');
-        window.location.reload();
+        // window.location.reload();
     }
     return (
         <div className='d-flex vh-100 bg-primary  justify-content-center align-items-center'>
